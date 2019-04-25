@@ -1,6 +1,7 @@
 package om.springframework5.recipeapp.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -17,7 +18,10 @@ public class Recipe {
     private String url;
     private String direction;
     //todo add
-    //private Dificulty dificulty;
+    //private Difficulty difficulty;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
