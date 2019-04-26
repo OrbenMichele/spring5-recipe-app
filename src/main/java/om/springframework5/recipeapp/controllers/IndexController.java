@@ -5,7 +5,9 @@ import om.springframework5.recipeapp.domain.Category;
 import om.springframework5.recipeapp.domain.UnitOfMeasure;
 import om.springframework5.recipeapp.repositories.CategoryRepository;
 import om.springframework5.recipeapp.repositories.UnitOfMesureRepository;
+import om.springframework5.recipeapp.services.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -13,22 +15,16 @@ import java.util.Optional;
 @Controller
 public class IndexController {
 
-    private CategoryRepository categoryRepository;
-    private UnitOfMesureRepository unitOfMesureRepository;
+    private final RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMesureRepository unitOfMesureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMesureRepository = unitOfMesureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
     @RequestMapping({"", "/", "/index"})
-    public String getIndexPage(){
+    public String getIndexPage(Model model){
 
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMesureRepository.findByDescription("Teaspoon");
-
-        System.out.println("Category ID is: " + categoryOptional.get().getId());
-        System.out.println("UOM ID is: " + unitOfMeasureOptional.get().getId());
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
