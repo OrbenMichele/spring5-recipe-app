@@ -3,6 +3,8 @@ package om.springframework5.recipeapp.domain;
 import javax.persistence.*;
 import java.util.Set;
 
+
+
 @Entity
 public class Category {
 

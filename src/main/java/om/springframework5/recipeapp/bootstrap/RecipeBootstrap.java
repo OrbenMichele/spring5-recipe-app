@@ -1,5 +1,8 @@
 package om.springframework5.recipeapp.bootstrap;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import om.springframework5.recipeapp.domain.*;
 import om.springframework5.recipeapp.repositories.CategoryRepository;
 import om.springframework5.recipeapp.repositories.RecipeRepository;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.*;
 
+@Data
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
