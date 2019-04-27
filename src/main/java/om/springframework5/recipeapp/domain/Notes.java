@@ -1,10 +1,11 @@
 package om.springframework5.recipeapp.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 

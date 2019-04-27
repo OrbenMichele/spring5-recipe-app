@@ -1,8 +1,6 @@
 package om.springframework5.recipeapp.bootstrap;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import om.springframework5.recipeapp.domain.*;
 import om.springframework5.recipeapp.repositories.CategoryRepository;
 import om.springframework5.recipeapp.repositories.RecipeRepository;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.*;
 
-@Data
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -32,6 +30,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("Loading Bootstrap Data");
     }
 
     private List<Recipe> getRecipes(){
@@ -141,13 +140,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         guacRecipe.setNotes(guacamoleNotes);
 
-        guacRecipe.addingIngretient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
-        guacRecipe.addingIngretient(new Ingredient("Kosher salt", new BigDecimal(.5), teaspoonUom));
-        guacRecipe.addingIngretient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(1), tablespoonUom));
-        guacRecipe.addingIngretient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tablespoonUom));
-        guacRecipe.addingIngretient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom));
-        guacRecipe.addingIngretient(new Ingredient("cilantro (leaves and tender stems), finely chopped", new BigDecimal(2), tablespoonUom));
-        guacRecipe.addingIngretient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(.5), eachUom));
+        guacRecipe.addingIngredient(new Ingredient("ripe avocados", new BigDecimal(2), eachUom));
+        guacRecipe.addingIngredient(new Ingredient("Kosher salt", new BigDecimal(.5), teaspoonUom));
+        guacRecipe.addingIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(1), tablespoonUom));
+        guacRecipe.addingIngredient(new Ingredient("minced red onion or thinly sliced green onion", new BigDecimal(2), tablespoonUom));
+        guacRecipe.addingIngredient(new Ingredient("serrano chiles, stems and seeds removed, minced", new BigDecimal(2), eachUom));
+        guacRecipe.addingIngredient(new Ingredient("cilantro (leaves and tender stems), finely chopped", new BigDecimal(2), tablespoonUom));
+        guacRecipe.addingIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(.5), eachUom));
 
         //add to return list
         recipes.add(guacRecipe);
