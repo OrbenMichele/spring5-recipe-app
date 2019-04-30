@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import om.springframework5.recipeapp.domain.*;
 import om.springframework5.recipeapp.repositories.CategoryRepository;
 import om.springframework5.recipeapp.repositories.RecipeRepository;
-import om.springframework5.recipeapp.repositories.UnitOfMesureRepository;
+import om.springframework5.recipeapp.repositories.UnitOfMeasureRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -19,9 +19,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
-    private final UnitOfMesureRepository unitOfMesureRepository;
+    private final UnitOfMeasureRepository unitOfMesureRepository;
 
-    public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMesureRepository unitOfMesureRepository) {
+    public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMesureRepository) {
 
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
