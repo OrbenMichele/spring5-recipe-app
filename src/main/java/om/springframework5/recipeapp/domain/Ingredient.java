@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(exclude = {"recipe"})
@@ -19,6 +21,9 @@ public class Ingredient {
 
     @OneToOne(fetch = FetchType.EAGER)
     private UnitOfMeasure uom;
+
+    //private Set<UnitOfMeasure> uomList = new HashSet<>();
+
 
     @ManyToOne
     private Recipe recipe;

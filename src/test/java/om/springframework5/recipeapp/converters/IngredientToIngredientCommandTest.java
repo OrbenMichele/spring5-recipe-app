@@ -1,7 +1,7 @@
 package om.springframework5.recipeapp.converters;
 
 
-import om.springframework5.recipeapp.commands.IngredientsCommand;
+import om.springframework5.recipeapp.commands.IngredientCommand;
 import om.springframework5.recipeapp.domain.Ingredient;
 import om.springframework5.recipeapp.domain.Recipe;
 import om.springframework5.recipeapp.domain.UnitOfMeasure;
@@ -51,9 +51,9 @@ public class IngredientToIngredientCommandTest {
         ingredient.setDescription(DESCRIPTION);
         ingredient.setUom(null);
         //when
-        IngredientsCommand ingredientCommand = converter.convert(ingredient);
+        IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
-        assertNull(ingredientCommand.getUnitOfMeasure());
+        assertNull(ingredientCommand.getUom());
         assertEquals(ID_VALUE, ingredientCommand.getId());
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
@@ -73,11 +73,11 @@ public class IngredientToIngredientCommandTest {
 
         ingredient.setUom(uom);
         //when
-        IngredientsCommand ingredientCommand = converter.convert(ingredient);
+        IngredientCommand ingredientCommand = converter.convert(ingredient);
         //then
         assertEquals(ID_VALUE, ingredientCommand.getId());
-        assertNotNull(ingredientCommand.getUnitOfMeasure());
-        assertEquals(UOM_ID, ingredientCommand.getUnitOfMeasure().getId());
+        assertNotNull(ingredientCommand.getUom());
+        assertEquals(UOM_ID, ingredientCommand.getUom().getId());
         // assertEquals(RECIPE, ingredientCommand.get);
         assertEquals(AMOUNT, ingredientCommand.getAmount());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());

@@ -5,9 +5,10 @@ import om.springframework5.recipeapp.commands.UnitOfMeasureCommand;
 import om.springframework5.recipeapp.domain.UnitOfMeasure;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-@Controller
+@Component
 public class UnitOfMeasureToUnitOfMeasureCommand implements Converter<UnitOfMeasure, UnitOfMeasureCommand> {
 
     @Synchronized //lombok

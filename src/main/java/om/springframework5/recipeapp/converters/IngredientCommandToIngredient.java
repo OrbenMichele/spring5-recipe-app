@@ -1,6 +1,6 @@
 package om.springframework5.recipeapp.converters;
 
-import om.springframework5.recipeapp.commands.IngredientsCommand;
+import om.springframework5.recipeapp.commands.IngredientCommand;
 import om.springframework5.recipeapp.domain.Ingredient;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class IngredientCommandToIngredient implements Converter<IngredientsCommand, Ingredient> {
+public class IngredientCommandToIngredient implements Converter<IngredientCommand, Ingredient> {
 
     private final UnitOfMeasureCommandToUnitOfMeasure uomConverter;
 
@@ -18,7 +18,7 @@ public class IngredientCommandToIngredient implements Converter<IngredientsComma
 
     @Nullable
     @Override
-    public Ingredient convert(IngredientsCommand source) {
+    public Ingredient convert(IngredientCommand source) {
         if (source == null) {
             return null;
         }
@@ -27,7 +27,7 @@ public class IngredientCommandToIngredient implements Converter<IngredientsComma
         ingredient.setId(source.getId());
         ingredient.setAmount(source.getAmount());
         ingredient.setDescription(source.getDescription());
-        ingredient.setUom(uomConverter.convert(source.getUnitOfMeasure()));
+        ingredient.setUom(uomConverter.convert(source.getUom()));
         return ingredient;
     }
 }

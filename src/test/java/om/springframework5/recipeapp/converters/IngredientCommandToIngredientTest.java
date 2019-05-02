@@ -1,7 +1,7 @@
 package om.springframework5.recipeapp.converters;
 
 
-import om.springframework5.recipeapp.commands.IngredientsCommand;
+import om.springframework5.recipeapp.commands.IngredientCommand;
 import om.springframework5.recipeapp.commands.UnitOfMeasureCommand;
 import om.springframework5.recipeapp.domain.Ingredient;
 import om.springframework5.recipeapp.domain.Recipe;
@@ -34,19 +34,19 @@ public class IngredientCommandToIngredientTest {
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new IngredientsCommand()));
+        assertNotNull(converter.convert(new IngredientCommand()));
     }
 
     @Test
     public void convert() throws Exception {
         //given
-        IngredientsCommand command = new IngredientsCommand();
+        IngredientCommand command = new IngredientCommand();
         command.setId(ID_VALUE);
         command.setAmount(AMOUNT);
         command.setDescription(DESCRIPTION);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
-        command.setUnitOfMeasure(unitOfMeasureCommand);
+        command.setUom(unitOfMeasureCommand);
 
         //when
         Ingredient ingredient = converter.convert(command);
@@ -63,7 +63,7 @@ public class IngredientCommandToIngredientTest {
     @Test
     public void convertWithNullUOM() throws Exception {
         //given
-        IngredientsCommand command = new IngredientsCommand();
+        IngredientCommand command = new IngredientCommand();
         command.setId(ID_VALUE);
         command.setAmount(AMOUNT);
         command.setDescription(DESCRIPTION);

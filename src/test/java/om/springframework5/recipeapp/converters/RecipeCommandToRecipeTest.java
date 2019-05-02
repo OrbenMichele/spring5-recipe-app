@@ -1,7 +1,7 @@
 package om.springframework5.recipeapp.converters;
 
 import om.springframework5.recipeapp.commands.CategoryCommand;
-import om.springframework5.recipeapp.commands.IngredientsCommand;
+import om.springframework5.recipeapp.commands.IngredientCommand;
 import om.springframework5.recipeapp.commands.NotesCommand;
 import om.springframework5.recipeapp.commands.RecipeCommand;
 import om.springframework5.recipeapp.domain.Difficulty;
@@ -75,10 +75,10 @@ public class RecipeCommandToRecipeTest {
         recipeCommand.getCategories().add(category);
         recipeCommand.getCategories().add(category2);
 
-        IngredientsCommand ingredient = new IngredientsCommand();
+        IngredientCommand ingredient = new IngredientCommand();
         ingredient.setId(INGRED_ID_1);
 
-        IngredientsCommand ingredient2 = new IngredientsCommand();
+        IngredientCommand ingredient2 = new IngredientCommand();
         ingredient2.setId(INGRED_ID_2);
 
         recipeCommand.getIngredients().add(ingredient);
