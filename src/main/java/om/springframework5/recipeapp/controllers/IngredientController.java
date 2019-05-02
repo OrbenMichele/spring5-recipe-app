@@ -2,6 +2,8 @@ package om.springframework5.recipeapp.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import om.springframework5.recipeapp.commands.IngredientCommand;
+import om.springframework5.recipeapp.commands.RecipeCommand;
+import om.springframework5.recipeapp.commands.UnitOfMeasureCommand;
 import om.springframework5.recipeapp.services.IngredientService;
 import om.springframework5.recipeapp.services.RecipeService;
 import om.springframework5.recipeapp.services.UnitOfMeasureService;
@@ -47,6 +49,28 @@ public class IngredientController {
         return "recipe/ingredient/show";
     }
 
+
+    @GetMapping
+    @RequestMapping("/recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId, Model model){
+
+        //make sure the id value is good
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+
+        //todo raise exception if null
+
+        //need to return back parent id for hidden property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient", ingredientCommand);
+        //init uom
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
+
+    }
     @GetMapping
     @RequestMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
@@ -62,22 +86,24 @@ public class IngredientController {
 
 
     @GetMapping
-    @RequestMapping("recipe/{recipeId}/ingredient/delete")
+    @RequestMapping("recipe/{recipeId}/ingredient/{id}/delete")
     public String deleteIngredient(@PathVariable String recipeId,
                                    @PathVariable String id){
 
-        //model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
-        ingredientService.deleteByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(id));
-        return "recipe/ingredient/list";
+        log.debug("deleting ingredient id:" + id);
+        ingredientService.deleteById(Long.valueOf(recipeId), Long.valueOf(id));
+
+        return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 
 
     @PostMapping
-    @RequestMapping("recipe/{recipeId}/ingredient")
+    //@RequestMapping("recipe/{recipeId}/ingredient")
     public String saveOrUpdate(@ModelAttribute IngredientCommand command){
 
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() +"/show" ;
     }
+
 }
