@@ -26,8 +26,7 @@ public class IngredientController {
     }
 
 
-    @GetMapping
-    @RequestMapping("/recipe/{recipeId}/ingredients")
+    @GetMapping("/recipe/{recipeId}/ingredients")
     public String listIngredients(@PathVariable String recipeId, Model model){
 
         log.debug("Getting ingredient list for recipe id: " + recipeId);
@@ -39,8 +38,7 @@ public class IngredientController {
 
     }
 
-    @GetMapping
-    @RequestMapping("/recipe/{recipeId}/ingredient/{id}/show")
+    @GetMapping("/recipe/{recipeId}/ingredient/{id}/show")
     public String showRecipeIngredientById(@PathVariable String recipeId,
                                            @PathVariable String id, Model model){
 
@@ -49,9 +47,7 @@ public class IngredientController {
         return "recipe/ingredient/show";
     }
 
-
-    @GetMapping
-    @RequestMapping("/recipe/{recipeId}/ingredient/new")
+    @GetMapping("/recipe/{recipeId}/ingredient/new")
     public String newRecipe(@PathVariable String recipeId, Model model){
 
         //make sure the id value is good
@@ -71,8 +67,8 @@ public class IngredientController {
         return "recipe/ingredient/ingredientform";
 
     }
-    @GetMapping
-    @RequestMapping("recipe/{recipeId}/ingredient/{id}/update")
+
+    @GetMapping("recipe/{recipeId}/ingredient/{id}/update")
     public String updateRecipeIngredient(@PathVariable String recipeId,
                                          @PathVariable String id, Model
                                           model){
@@ -85,8 +81,7 @@ public class IngredientController {
     }
 
 
-    @GetMapping
-    @RequestMapping("recipe/{recipeId}/ingredient/{id}/delete")
+    @GetMapping("recipe/{recipeId}/ingredient/{id}/delete")
     public String deleteIngredient(@PathVariable String recipeId,
                                    @PathVariable String id){
 
@@ -97,8 +92,7 @@ public class IngredientController {
     }
 
 
-    @PostMapping
-    //@RequestMapping("recipe/{recipeId}/ingredient")
+    @PostMapping("recipe/{recipeId}/ingredient")
     public String saveOrUpdate(@ModelAttribute IngredientCommand command){
 
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
