@@ -12,6 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RecipeCommandToRecipeTest {
+
     public static final Long RECIPE_ID = 1L;
     public static final Integer COOK_TIME = Integer.valueOf("5");
     public static final Integer PREP_TIME = Integer.valueOf("7");
@@ -44,7 +45,8 @@ public class RecipeCommandToRecipeTest {
 
     @Test
     public void testEmptyObject() throws Exception {
-        assertNotNull(converter.convert(new RecipeCommand()));    }
+        assertNotNull(converter.convert(new RecipeCommand()));
+    }
 
     @Test
     public void convert() throws Exception {

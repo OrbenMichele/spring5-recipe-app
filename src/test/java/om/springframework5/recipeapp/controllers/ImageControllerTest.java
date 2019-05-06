@@ -39,7 +39,9 @@ public class ImageControllerTest {
         MockitoAnnotations.initMocks(this);
 
         controller = new ImageController(service, recipeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(controller)
+                .setControllerAdvice(new ExceptionHandlerController())
+                .build();
 
     }
 
@@ -62,17 +64,19 @@ public class ImageControllerTest {
     @Test
     public void handleImagePost() throws Exception{
 
-        MockMultipartFile file = new MockMultipartFile("file",
+        MockMultipartFile file = new MockMultipartFile("imagefile",
                 "testing.txt",
                 "text/plain",
                 "String Framework".getBytes());
 
         this.mockMvc.perform(multipart("/recipe/1/image").file(file))
-                .andExpect(status().isFound())
-                .andExpect(header().string("Location", "/"));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(header().string("Location", "/recipe/1/show"));
 
-
+        verify(service, times(1)).saveImageFile(anyLong(), any());
     }
+
+
     @Test
     public void renderImageFromDB() throws Exception {
 
